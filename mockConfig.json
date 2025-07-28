@@ -1,0 +1,12 @@
+[
+  {
+    "route": "/first",
+    "method": "GET",
+    "delay": "200",
+    "responseCount": 2,
+    "schema": {
+      "name": "string",
+      "age": "number"
+    }
+  }
+]

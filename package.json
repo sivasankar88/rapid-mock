@@ -1,0 +1,39 @@
+{
+  "name": "rapid-mock",
+  "version": "1.0.0",
+  "description": "Interactive CLI to mock REST APIs quickly for frontend development.",
+  "keywords": [
+    "mock",
+    "mock-api",
+    "rest-api",
+    "api-server",
+    "cli",
+    "mock-server",
+    "frontend",
+    "development",
+    "json-server",
+    "tooling"
+  ],
+  "homepage": "https://github.com/sivasankar88/rapid-mock#readme",
+  "bugs": {
+    "url": "https://github.com/sivasankar88/rapid-mock/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sivasankar88/rapid-mock.git"
+  },
+  "license": "ISC",
+  "author": "Sivasankar K",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "faker": "^6.6.6",
+    "express": "^5.1.0",
+    "inquirer": "^12.8.2",
+    "nodemon": "^3.1.10"
+  }
+}
