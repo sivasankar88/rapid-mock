@@ -26,4 +26,5 @@ It is powered by [Faker.js](https://fakerjs.dev/) and designed to help you simul
 ## 📦 Installation
 
 ```bash
-npm install -g rapid-mock
+npm install -g rapid-mock-cli
+
