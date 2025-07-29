@@ -57,9 +57,31 @@ export const addEndpoint = async () => {
   console.log("Endpoint added!");
 };
 
-export const listEndpoints = () => {};
+export const listEndpoints = () => {
+  const config = getConfig();
+  if (!config.length) return console.log("No endpoints found");
+  config.forEach((endpoint, index) => {
+    console.log(`${index + 1}. [${endpoint.method}] ${endpoint.route}`);
+  });
+};
 
-export const deleteEndpoint = () => {};
+export const deleteEndpoint = async () => {
+  const config = getConfig();
+  if (!config.length) return console.log("No endpoints found");
+
+  const { index } = await inquirer.prompt({
+    type: "list",
+    name: "index",
+    message: "Choose endpoint to delete:",
+    choices: config.map((endpoint, index) => ({
+      name: `[${endpoint.method}] ${endpoint.route}`,
+      value: index,
+    })),
+  });
+  config.splice(index, 1);
+  saveConfig(config);
+  console.log("Endpoint deleted.");
+};
 
 export const fieldToFaker = (fieldName, fieldType) => {
   switch (fieldName) {
