@@ -28,3 +28,4 @@ It is powered by [Faker.js](https://fakerjs.dev/) and designed to help you simul
 ```bash
 npm install -g rapid-mock-cli
 
+```
