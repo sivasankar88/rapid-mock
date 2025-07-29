@@ -1,6 +1,8 @@
 import inquirer from "inquirer";
 import fs from "fs";
 import { faker } from "@faker-js/faker";
+import { reloadEndpoints } from "./server.js";
+
 const CONFIG_PATH = "./mockConfig.json";
 
 const getConfig = () => {
@@ -8,9 +10,12 @@ const getConfig = () => {
     ? JSON.parse(fs.readFileSync(CONFIG_PATH))
     : [];
 };
+
 const saveConfig = (config) => {
   fs.writeFileSync(CONFIG_PATH, JSON.stringify(config, null, 2));
+  reloadEndpoints();
 };
+
 export const addEndpoint = async () => {
   const config = getConfig();
   const answers = await inquirer.prompt([
@@ -21,9 +26,10 @@ export const addEndpoint = async () => {
       choices: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     },
     { name: "delay", message: "Delay in ms (optional):", default: 0 },
+    { name: "code", message: "status code:", default: 200 },
   ]);
 
-  if (answers.method === "GET") {
+  if (answers.code == 200 && answers.method === "GET") {
     const { responseCount } = await inquirer.prompt({
       name: "responseCount",
       message: "Number of responses:",
@@ -32,20 +38,27 @@ export const addEndpoint = async () => {
       name: "fieldCount",
       message: "Number of fields:",
     });
-    const schema = {};
 
+    const schema = {};
     for (let i = 0; i < parseInt(fieldCount); i++) {
       const { key, type } = await inquirer.prompt([
         { name: "key", message: `Field ${i + 1} name:` },
         {
           name: "type",
+          type: "list",
           message: `Field ${i + 1} type:`,
           choices: ["string", "number", "boolean", "date"],
         },
       ]);
       schema[key] = type;
     }
-    config.push({ ...answers, responseCount: parseInt(responseCount), schema });
+
+    config.push({
+      ...answers,
+      code: parseInt(answers.code),
+      responseCount: parseInt(responseCount),
+      schema,
+    });
   } else {
     const { message } = await inquirer.prompt({
       name: "message",
@@ -53,8 +66,9 @@ export const addEndpoint = async () => {
     });
     config.push({ ...answers, message });
   }
+
   saveConfig(config);
-  console.log("Endpoint added!");
+  console.log("✅ Endpoint added and applied live");
 };
 
 export const listEndpoints = () => {
@@ -78,9 +92,10 @@ export const deleteEndpoint = async () => {
       value: index,
     })),
   });
+
   config.splice(index, 1);
   saveConfig(config);
-  console.log("Endpoint deleted.");
+  console.log("🗑️  Endpoint deleted and changes applied live");
 };
 
 export const fieldToFaker = (fieldName, fieldType) => {
@@ -90,7 +105,7 @@ export const fieldToFaker = (fieldName, fieldType) => {
     case "email":
       return faker.internet.email();
     case "age":
-      return faker.number.int();
+      return faker.number.int({ min: 0, max: 100 });
     case "id":
       return faker.datatype.uuid();
     case "city":

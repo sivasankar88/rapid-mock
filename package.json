@@ -1,6 +1,6 @@
 {
   "name": "rapid-mock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Interactive CLI to mock REST APIs quickly for frontend development.",
   "keywords": [
     "mock",
@@ -35,5 +35,8 @@
     "express": "^5.1.0",
     "inquirer": "^12.8.2",
     "nodemon": "^3.1.10"
+  },
+  "bin": {
+    "rapid-mock": "./index.js"
   }
 }

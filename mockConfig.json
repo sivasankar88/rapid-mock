@@ -1,1 +1,80 @@
-[]
+[
+  {
+    "route": "/hai",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": 2,
+    "schema": {
+      "name": "string",
+      "age": "number"
+    }
+  },
+  {
+    "route": "/error",
+    "method": "GET",
+    "delay": 0,
+    "code": 400,
+    "message": "falied to get data "
+  },
+  {
+    "route": "/dummy",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": 10,
+    "schema": {
+      "test": "string"
+    }
+  },
+  {
+    "route": "",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": null,
+    "schema": {}
+  },
+  {
+    "route": "/dummyjson",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": 50,
+    "schema": {
+      "type": "string"
+    }
+  },
+  {
+    "route": "",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": null,
+    "schema": {}
+  },
+  {
+    "route": "",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": null,
+    "schema": {}
+  },
+  {
+    "route": "",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": null,
+    "schema": {}
+  },
+  {
+    "route": "",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": null,
+    "schema": {}
+  }
+]
