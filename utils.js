@@ -19,30 +19,63 @@ const saveConfig = (config) => {
 export const addEndpoint = async () => {
   const config = getConfig();
   const answers = await inquirer.prompt([
-    { name: "route", message: "Enter route (e.g., /users):" },
+    {
+      name: "route",
+      message: "Enter route (e.g., /users):",
+      validate: (input) =>
+        input.startsWith("/") ? true : "Route must start with '/'",
+    },
     {
       name: "method",
+      message: "method",
       type: "list",
       choices: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     },
-    { name: "delay", message: "Delay in ms (optional):", default: 0 },
-    { name: "code", message: "status code:", default: 200 },
+    {
+      name: "delay",
+      message: "Delay in ms (optional):",
+      default: 0,
+      validate: (input) =>
+        isNaN(parseInt(input)) ? "Please enter a valid number" : true,
+    },
+    {
+      name: "code",
+      message: "status code:",
+      default: 200,
+      validate: (input) => {
+        const code = parseInt(input);
+        if (isNaN(code)) return "Please enter a valid number";
+        if (code < 100 || code > 599) return "Please enter a valid status code";
+        return true;
+      },
+    },
   ]);
 
   if (answers.code == 200 && answers.method === "GET") {
     const { responseCount } = await inquirer.prompt({
       name: "responseCount",
       message: "Number of responses:",
+      default: 5,
+      validate: (input) =>
+        isNaN(parseInt(input)) ? "Please enter a valid number" : true,
     });
     const { fieldCount } = await inquirer.prompt({
       name: "fieldCount",
       message: "Number of fields:",
+      default: 1,
+      validate: (input) =>
+        isNaN(parseInt(input)) ? "Please enter a valid number" : true,
     });
 
     const schema = {};
     for (let i = 0; i < parseInt(fieldCount); i++) {
       const { key, type } = await inquirer.prompt([
-        { name: "key", message: `Field ${i + 1} name:` },
+        {
+          name: "key",
+          message: `Field ${i + 1} name:`,
+          validate: (input) =>
+            !input.length ? "Please enter a valid field name" : true,
+        },
         {
           name: "type",
           type: "list",
@@ -64,7 +97,7 @@ export const addEndpoint = async () => {
       name: "message",
       message: "Static response message:",
     });
-    config.push({ ...answers, message });
+    config.push({ ...answers, code: parseInt(answers.code), message });
   }
 
   saveConfig(config);

@@ -1,6 +1,6 @@
 {
   "name": "rapid-mock-cli",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Interactive CLI to mock REST APIs quickly for frontend development.",
   "keywords": [
     "mock",

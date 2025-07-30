@@ -18,16 +18,6 @@
     "message": "falied to get data "
   },
   {
-    "route": "/dummy",
-    "method": "GET",
-    "delay": 0,
-    "code": 200,
-    "responseCount": 10,
-    "schema": {
-      "test": "string"
-    }
-  },
-  {
     "route": "",
     "method": "GET",
     "delay": 0,
@@ -76,5 +66,71 @@
     "code": 200,
     "responseCount": null,
     "schema": {}
+  },
+  {
+    "route": "",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": null,
+    "schema": {}
+  },
+  {
+    "route": "/gdfgsf",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": 5,
+    "schema": {
+      "": "string"
+    }
+  },
+  {
+    "route": "/hai",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": 5,
+    "schema": {}
+  },
+  {
+    "route": "/fsgf",
+    "method": "GET",
+    "delay": 0,
+    "code": "300",
+    "message": ""
+  },
+  {
+    "route": "/hai",
+    "method": "GET",
+    "delay": 0,
+    "code": "300",
+    "message": "added"
+  },
+  {
+    "route": "/dummy",
+    "method": "GET",
+    "delay": 0,
+    "code": 200,
+    "responseCount": 5,
+    "schema": {
+      "siva": "string",
+      "sankar": "string",
+      "age": "boolean"
+    }
+  },
+  {
+    "route": "/checkdelete",
+    "method": "DELETE",
+    "delay": 0,
+    "code": 200,
+    "message": "deleted successfully"
+  },
+  {
+    "route": "/errorDelete",
+    "method": "DELETE",
+    "delay": "400",
+    "code": 400,
+    "message": "bad request"
   }
 ]
